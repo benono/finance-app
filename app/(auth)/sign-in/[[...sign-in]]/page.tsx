@@ -1,8 +1,9 @@
+import { SignIn } from "@clerk/nextjs";
+
+
 const SignInPage = () => {
     return (
-        <div>
-            Sign in page
-        </div>
+        <SignIn path="/sign-in" />
     )
 }
 
