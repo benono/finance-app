@@ -1,4 +1,5 @@
-import { SignIn } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
+import { SignIn, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 
 
 const SignInPage = () => {
@@ -13,7 +14,12 @@ const SignInPage = () => {
                         Login or Create account to get back to your dashboard
                     </p>
                     <div className="flex items-center justify-center mt-8">
-                        <SignIn path="/sign-in" />
+                        <ClerkLoaded>
+                            <SignIn path="/sign-in" />
+                        </ClerkLoaded>
+                        <ClerkLoading>
+                            <Loader2 className="animate-spin text-muted-foreground" />
+                        </ClerkLoading>
                     </div>
                 </div>
             </div>
