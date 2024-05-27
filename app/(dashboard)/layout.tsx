@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { QueryProvider } from "@/providers/query-provider"
 type Props = {
     children: React.ReactNode
 }
@@ -7,7 +8,9 @@ const DashboardLayout = ({ children }: Props) => {
         <>
             <Header />
             <main className="px-3 lg:px-14">
-                {children}
+                <QueryProvider>
+                    {children}
+                </QueryProvider>
             </main>
         </>
     )
