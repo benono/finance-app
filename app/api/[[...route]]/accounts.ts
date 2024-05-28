@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { clerkMiddleware, getAuth } from '@hono/clerk-auth'
+import { eq } from "drizzle-orm"
 import { HTTPException } from "hono/http-exception"
 
 import { db } from '@/db/drizzle'
@@ -22,6 +23,7 @@ const app = new Hono()
                     name: accounts.name,
                 })
                 .from(accounts)
+                .where(eq(accounts.userId, auth.userId))
             return c.json({ data })
         })
 
