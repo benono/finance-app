@@ -1,4 +1,4 @@
-"use cilent"
+"use client"
 
 import { useMountedState } from "react-use"
 
