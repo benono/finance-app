@@ -2,6 +2,7 @@ import { z } from "zod"
 import { useNewAccount } from "@/features/hooks/use-new-account"
 import { AccountForm } from "@/features/accounts/components/account-form"
 import { insertAccountSchema } from "@/db/schema"
+import { useCreateAccount } from "@/features/accounts/api/use-create-accounts"
 
 import {
     Sheet,
@@ -20,10 +21,15 @@ type FormValues = z.input<typeof formSchema>
 
 export const NewAccountSheet = () => {
     const { isOpen, onClose } = useNewAccount()
+const mutation = useCreateAccount()
 
     const onSubmit = (values: FormValues) => {
-        console.log({ values })
-        console.log('EIEI')
+     // it's not mutate
+        mutation.mutate(values, {
+            onSuccess:() => {
+                onClose()
+            }
+        })
     }
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
@@ -39,7 +45,7 @@ export const NewAccountSheet = () => {
                 <AccountForm
                     onSubmit={onSubmit}
                     onDelete={() => { }}
-                    disabled={false}
+                    disabled={mutation.isPending}
                     defaultValues={{
                         name: ""
                     }}
